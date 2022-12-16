@@ -64,21 +64,21 @@
 	
 	<main>
 
-		<form class="webSubForm" action='https://pubsubhubbub.appspot.com/' method='POST'>
+		<form class='webSubForm' action='https://pubsubhubbub.appspot.com/' method='POST' onsubmit='formSubmit()'>
 		
 			  <input type='hidden' name='hub.mode' value='publish' />
 			  
-			  <label for="hubURL">RSS Feed URL:</label>
+			  <label for='hubURL'>RSS Feed URL:</label>
 			  
 			  <input 
-				type="url" 
+				type='url' 
 				name='hub.url' 
-				placeholder="https://example.com/feed/"
-				pattern="https://.*" size="50"
-				id="hubURL"
+				placeholder='https://example.com/feed/'
+				pattern='https://.*' size='50'
+				id='hubURL'
 				required>
 				
-			  <input type="submit" value="Submit" onsubmit="formSubmit()" />
+			  <input type='submit' value='Submit' />
 			  
 		</form> 
 
