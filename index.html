@@ -13,28 +13,47 @@
     <title>WebSub Manual Ping Tool - Colin McDermott</title>
 	
 	<style>
-	main {
-	contain-intrinsic-size:0 500px;
-	content-visibility:auto;
-	}
-	html {text-rendering: optimizeSpeed;}
-	:root {
-    --flowSpace: 1.09em;
-	--backgroundLight: #F9F9F9;
-	}
-	body, p, input, label {font-family:'SF Pro Text','Segoe UI',system-ui,sans-serif;font-size:16px;line-height:20px;}
-	main, aside {padding: var(--flowSpace);}
-	form {display: inline-block;padding: var(--flowSpace); background-color:var(--backgroundLight);}
-	input, label {margin-right: var(--flowSpace);}
-	input[type=submit] {
-	background-color: black;
-    color: white;
-	padding: 4px 8px;
-	opacity:0.9;
-	}
-	input[type=submit]:hover {opacity:1}
-	summary {margin-bottom: var(--flowSpace);}
-	summary:hover {text-decoration:underline; cursor:pointer;}
+		main {
+			contain-intrinsic-size:0 500px;
+			content-visibility:auto;
+		}
+		html {
+			text-rendering: optimizeSpeed;
+		}
+		:root {
+			--flowSpace: 1.09em;
+			--backgroundLight: #F9F9F9;
+		}
+		body, p, input, label {
+			font-family:'SF Pro Text','Segoe UI',system-ui,sans-serif;font-size:16px;line-height:20px;
+		}
+		main, aside {
+			padding: var(--flowSpace);
+		}
+		form {
+			display: inline-block;padding: var(--flowSpace); background-color:var(--backgroundLight);
+		}
+		input, label {
+			margin-right: var(--flowSpace);
+		}
+		input[type=submit] {
+			background-color: black;
+			color: white;
+			padding: 4px 8px;
+			opacity:0.9;
+		}
+		input[type=submit]:hover {
+			opacity:1
+		}
+		aide {
+			display: inline-block;
+		}
+		summary {
+			margin-bottom: var(--flowSpace);
+		}
+		summary:hover {
+			text-decoration:underline; cursor:pointer;
+		}
 	</style>
 	
 	<link rel="dns-prefetch" href="https://pubsubhubbub.appspot.com/" />
