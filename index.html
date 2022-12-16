@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,11 +13,16 @@
     <title>WebSub Manual Ping Tool - Colin McDermott</title>
 	
 	<style>
-	body, p, input, label {font-family:'SF Pro Text','Segoe UI',system-ui,sans-serif;font-size:16px;line-height:20px;}
+	main {
+	contain-intrinsic-size:0 500px;
+	content-visibility:auto;
+	}
+	html {text-rendering: optimizeSpeed;}
 	:root {
     --flowSpace: 1.09em;
 	--backgroundLight: #F9F9F9;
 	}
+	body, p, input, label {font-family:'SF Pro Text','Segoe UI',system-ui,sans-serif;font-size:16px;line-height:20px;}
 	main, aside {padding: var(--flowSpace);}
 	form {display: inline-block;padding: var(--flowSpace); background-color:var(--backgroundLight);}
 	input, label {margin-right: var(--flowSpace);}
@@ -46,12 +54,12 @@
 			  <input 
 				type="url" 
 				name='hub.url' 
-				placeholder="https://example.com"
+				placeholder="https://example.com/feed/"
 				pattern="https://.*" size="50"
 				id="hubURL"
 				required>
 				
-			  <input type='submit'  />
+			  <input id="btn" type="submit" value="Submit"  />
 			  
 		</form> 
 
@@ -63,7 +71,20 @@
 			Enter your RSS feed and hit 'submit' to send a POST request to Google's <a href="https://pubsubhubbub.appspot.com/" target="_blank">WebSub hub</a>, which should trigger Google to crawl the specified feed immediately.
 		</details>
 	</aside>
+
+	<script>
+		document.getElementById("btn").addEventListener(
+		  "click",
+		  function(event) {
+			if (event.target.value === "Submit") {
+			  event.target.value = "Ping Started";
+			} else {
+			  event.target.value = "Submit";
+			}
+		  },
+		  false
+		);
+	</script>
 	
   </body>
 </html>
-
