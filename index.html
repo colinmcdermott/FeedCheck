@@ -78,7 +78,7 @@
 				id="hubURL"
 				required>
 				
-			  <input type="submit" value="Submit"  />
+			  <input type="submit" value="Submit" onsubmit="formSubmit()" />
 			  
 		</form> 
 
@@ -90,6 +90,12 @@
 			Enter your RSS feed and hit 'submit' to send a POST request to Google's <a href="https://pubsubhubbub.appspot.com/" target="_blank">WebSub hub</a>, which should trigger Google to crawl the specified feed immediately.
 		</details>
 	</aside>
+	  
+	<script>
+	function formSubmit() {
+	  alert("Feed submitted");
+	}
+	</script>
 
   </body>
 </html>
