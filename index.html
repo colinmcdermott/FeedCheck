@@ -10,13 +10,13 @@
     <title>WebSub Manual Ping Tool - Colin McDermott</title>
 	
 	<style>
-	body {font-family:'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 16px;}
+	body, p, input, label {font-family:'SF Pro Text','Segoe UI',system-ui,sans-serif; font-size: 16px;}
 	:root {
     --flowSpace: 1.09em;
 	--backgroundLight: #F9F9F9;
 	}
 	main {padding: var(--flowSpace);}
-	form {padding: var(--flowSpace); background-color:var(--backgroundLight); max-width: 620px;}
+	form {display: inline-block;padding: var(--flowSpace); background-color:var(--backgroundLight);}
 	input, label {margin-right: var(--flowSpace);}
 	input[type=submit] {
 	background-color: black;
@@ -24,6 +24,8 @@
 	padding: 4px 8px;
 	}
 	</style>
+	
+	<link rel="dns-prefetch" href="https://pubsubhubbub.appspot.com/" />
 	
   </head>
   
@@ -53,4 +55,3 @@
 	
   </body>
 </html>
-
