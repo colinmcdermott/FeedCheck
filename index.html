@@ -23,6 +23,7 @@
 			--flowSpace: 1.09em;
 			--backgroundLight: #F9F9F9;
 		}
+		body {background:white}
 		body, p, input, label {
 			font-family:'SF Pro Text','Segoe UI',system-ui,sans-serif;font-size:16px;line-height:20px;
 		}
@@ -54,6 +55,10 @@
 		summary:hover {
 			text-decoration:underline; cursor:pointer;
 		}
+		@media (prefers-color-scheme: dark) {
+			body {filter:invert(1);}
+		}
+}
 	</style>
 	
 	<link rel="dns-prefetch" href="https://pubsubhubbub.appspot.com/" />
