@@ -12,17 +12,21 @@
 	<style>
 	body, p, input, label {font-family:'SF Pro Text','Segoe UI',system-ui,sans-serif;font-size:16px;line-height:20px;}
 	:root {
-	--flowSpace: 1.09em;
+    --flowSpace: 1.09em;
 	--backgroundLight: #F9F9F9;
 	}
-	main {padding: var(--flowSpace);}
+	main, aside {padding: var(--flowSpace);}
 	form {display: inline-block;padding: var(--flowSpace); background-color:var(--backgroundLight);}
 	input, label {margin-right: var(--flowSpace);}
 	input[type=submit] {
 	background-color: black;
-	color: white;
+    color: white;
 	padding: 4px 8px;
+	opacity:0.9;
 	}
+	input[type=submit]:hover {opacity:1}
+	summary {margin-bottom: var(--flowSpace);}
+	summary:hover {text-decoration:underline; cursor:pointer;}
 	</style>
 	
 	<link rel="dns-prefetch" href="https://pubsubhubbub.appspot.com/" />
@@ -53,5 +57,13 @@
 
 	</main>
 	
+	<aside>
+		<details>
+			<summary>What is this tool?</summary>
+			Enter your RSS feed and hit 'submit' to send a POST request to Google's <a href="https://pubsubhubbub.appspot.com/" target="_blank">WebSub hub</a>, which should trigger Google to crawl the specified feed immediately.
+		</details>
+	</aside>
+	
   </body>
 </html>
+
