@@ -61,12 +61,6 @@
 			text-decoration:underline;
 			cursor:pointer;
 		}
-		@media (prefers-color-scheme: dark) 
-			{
-				html {
-					filter:invert(1);
-				}
-		}
 		@media screen and (max-width: 550px) {
 			body, input, label {
 				font-size:16px;
@@ -87,21 +81,6 @@
 				padding:0;
 			}
 		  }
-		  /* Change Autocomplete styles in Chrome*/
-			input:-webkit-autofill,
-			input:-webkit-autofill:hover, 
-			input:-webkit-autofill:focus,
-			textarea:-webkit-autofill,
-			textarea:-webkit-autofill:hover,
-			textarea:-webkit-autofill:focus,
-			select:-webkit-autofill,
-			select:-webkit-autofill:hover,
-			select:-webkit-autofill:focus {
-			  border: 1px solid transparent;
-			  -webkit-text-fill-color: transparent;
-			  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
-			  transition: background-color 5000s ease-in-out 0s;
-			}
 	</style>
 	<link rel="dns-prefetch" href="https://pubsubhubbub.appspot.com/" />
 	<link rel="canonical" href="https://websub-ping-tool.pages.dev/" />
