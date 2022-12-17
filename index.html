@@ -62,14 +62,20 @@
 			text-decoration:underline;
 			cursor:pointer;
 		}
-			@media (prefers-color-scheme: dark) 
+		@media (prefers-color-scheme: dark) 
 			{
 				html {
 					filter:invert(1);
 				}
 		}
 		@media screen and (max-width: 600px) {
-			form.webSubForm {flex-direction: column !important; padding: 5px !important;margin-bottom:15px !important;}
+			form.webSubForm {
+				flex-direction: column;
+				padding: 5px;
+				margin-bottom:15px;
+				align-items: flex-start;
+				align-content: flex-start;
+			}
 		  }
 	</style>
 	<link rel="dns-prefetch" href="https://pubsubhubbub.appspot.com/" />
