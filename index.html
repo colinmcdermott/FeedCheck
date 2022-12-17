@@ -79,25 +79,16 @@
 			main {
 				padding:0;
 			}
-			input[type=url] {
-				max-width:50%;
-		  	}
 		  }
 	</style>
 	<link rel="dns-prefetch" href="https://pubsubhubbub.appspot.com/" />
 	<link rel="canonical" href="https://websub-ping-tool.pages.dev/" />
   </head>
-  
   <body>
-	
 	<main>
-
 		<form class='webSubForm' action='https://pubsubhubbub.appspot.com/' method='POST' onsubmit='formSubmit()'>
-		
 			  <input type='hidden' name='hub.mode' value='publish' />
-			  
 			  <label for='hubURL'>RSS Feed URL:</label>
-			  
 			  <input 
 				type='url' 
 				name='hub.url' 
@@ -105,25 +96,19 @@
 				pattern='https://.*' size='38'
 				id='hubURL'
 				required>
-				
 			  <input type='submit' value='Submit' />
-			  
 		</form> 
-
 	</main>
-	
 	<aside>
 		<details>
 			<summary>What is this tool?</summary>
 			Enter your RSS feed and hit 'Submit' to send a POST request to Google's <a href="https://pubsubhubbub.appspot.com/">WebSub hub</a>. This should trigger Google to crawl the specified feed immediately.
 		</details>
 	</aside>
-	  
 	<script>
-	function formSubmit() {
-		setTimeout("alert('Feed submitted! 🎉');",950);
-	}
+		function formSubmit() {
+			setTimeout("alert('Feed submitted! 🎉');",900);
+		}
 	</script>
-
   </body>
 </html>
