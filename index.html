@@ -100,11 +100,13 @@
 		</results>
 		<loading id="loading">
 		</loading>
+		<additional id="additional">
+		</additional>
 	</main>
 
 	<script>
 
-/* Do not refresh the page when the submit button is clicked. When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL', set this as variable 'hubURL', then print the value of 'hubURL' inside paragraph tags in the id=results element with the label  'Feed URL:'. Use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside a paragraph tag in the id='results' element with the label 'Response size:' and store it in local memory. Print 'Additional checking started' inside a paragraph tag in the id='loading' element. */
+/* Do not refresh the page when the submit button is clicked. When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL', set this as variable 'hubURL', then print the value of 'hubURL' inside paragraph tags in the id=results element with the label  'Feed URL:'. Use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside a paragraph tag in the id='results' element with the label 'Response size:' and store it in local memory. Print 'Additional checking started' inside a paragraph tag in the id='loading' element. Fetch the 'hubURL' RSS again every seconds, and each time print the size of the returned RSS feed inside a paragraph tag in the id='additional' element with the label 'Response size:'. */
 document.querySelector('.feedCheckForm').addEventListener('submit', function(event) {
   event.preventDefault();
   var hubURL = document.getElementById('hubURL').value;
@@ -119,7 +121,25 @@ document.querySelector('.feedCheckForm').addEventListener('submit', function(eve
       document.getElementById('results').innerHTML += '<p>Response size: ' + text.length + '</p>';
       localStorage.setItem('feedSize', text.length);
       document.getElementById('loading').innerHTML = '<p>Additional checking started</p>';
+      setTimeout(function() {
+        document.getElementById('repeat').click();
+      }, 5000);
     });
+});
+document.getElementById('repeat').addEventListener('click', function(event) {
+  var hubURL = document.getElementById('hubURL').value;
+  fetch(hubURL, {
+      mode: 'cors'
+    })
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      document.getElementById('additional').innerHTML += '<p>Response size: ' + text.length + '</p>';
+    });
+  setTimeout(function() {
+    document.getElementById('repeat').click();
+  }, 5000);
 });
 		
 	</script>
