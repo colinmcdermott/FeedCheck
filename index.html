@@ -142,6 +142,19 @@ function repeater() {
   }, 5000);
 }
 		
+/* If the value of the returned RSS feed is the same, print 'Feed size unchanged' inside a paragraph tag in the id='additional' element, if the value is different print 'New feed size' inside a paragraph tag in the id='additional' element. */
+function repeater() {
+  fetch(hubURL, {mode: 'cors'}).then(function(response) {
+    return response.text();
+  }).then(function(text) {
+    if (text.length === localStorage.getItem('feedSize').length) {
+      document.getElementById('additional').innerHTML += '<p>Feed size unchanged</p>';
+    } else {
+      document.getElementById('additional').innerHTML += '<p>New feed size</p>';
+    }
+  });
+}
+		
 	</script>
   </body>
 </html>
