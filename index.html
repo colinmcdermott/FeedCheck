@@ -87,8 +87,7 @@
   </head>
   <body>
 	<main>
-		<form class='webSubForm' action='https://pubsubhubbub.appspot.com/' method='POST' onsubmit='formSubmit()'>
-			  <input type='hidden' name='hub.mode' value='publish' />
+		<form class='feedCheckForm' action='#' method='POST' onsubmit='formSubmit()'>
 			  <label for='hubURL'>RSS Feed URL:</label>
 			  <input 
 				type='url' 
@@ -107,14 +106,34 @@
 		</details>
 	</aside>
 	<script>
-		/* On submit wait x and show alert */
-		function formSubmit() {
-			setTimeout("alert('Feed submitted! 🎉');",900);
-		}
-		/* Extract a URL parameter that matches 'feed=' */
-		var feed = window.location.search.match(/feed=([^&]+)/)[1];
-		/* Add the variable as the pre-filled value of the form input id='hubURL' */
-		document.getElementById('hubURL').value = feed;
+		/* On form submit, take the value from the 'hubURL' field, download the XML feed at this location, then print the size of the downloaded file. */
+var form = document.createElement('form');
+form.setAttribute('method', 'post');
+form.setAttribute('action', '#');
+var input = document.createElement('input');
+input.setAttribute('type', 'text');
+input.setAttribute('name', 'hubURL');
+input.setAttribute('value', 'http://www.google.com/reader/public/atom/user%2F06877995500558971582%2Fstate%2Fcom.google%2Fbroadcast');
+form.appendChild(input);
+var submit = document.createElement('input');
+submit.setAttribute('type', 'submit');
+submit.setAttribute('value', 'Submit');
+form.appendChild(submit);
+document.body.appendChild(form);
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', input.value, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      var size = xhr.responseText.length;
+      var sizeNode = document.createElement('div');
+      sizeNode.innerHTML = 'Size: ' + size;
+      document.body.appendChild(sizeNode);
+    }
+  }
+  xhr.send();
+}, false);
 	</script>
   </body>
 </html>
