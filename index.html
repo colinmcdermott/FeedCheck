@@ -106,27 +106,12 @@
 		</details>
 	</aside>
 	<script>
-	/* Create a function called formSubmit(), sets the value 'hubURL' form as a variable, then sends a valid GET request to the XML file at this location, download the file, the prints the total resource size of the file on the page. */
+	/* Create a function called formSubmit(). The formSubmit() function takes the value of ID = 'hubURL' from the form and prints this on the page. */
 function formSubmit() {
   var hubURL = document.getElementById('hubURL').value;
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', hubURL, true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-      var xmlDoc = xhr.responseXML;
-      var totalSize = 0;
-      var resources = xmlDoc.getElementsByTagName('resources');
-      for (var i = 0; i < resources.length; i++) {
-        var resource = resources[i];
-        var size = resource.getAttribute('size');
-        totalSize += parseInt(size);
-      }
-      var totalSizeDiv = document.createElement('div');
-      totalSizeDiv.innerHTML = 'Total size: ' + totalSize;
-      document.body.appendChild(totalSizeDiv);
-    }
-  };
-  xhr.send();
+  var hubURLDiv = document.createElement('div');
+  hubURLDiv.innerHTML = hubURL;
+  document.body.appendChild(hubURLDiv);
 }
 	</script>
   </body>
