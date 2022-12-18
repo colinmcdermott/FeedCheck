@@ -106,18 +106,23 @@
 		</details>
 	</aside>
 	<script>
-		function formSubmit() {
+	/* Create a function called formSubmit(), which downloads the XML/RSS feed specified in the 'hubURL' form field, downloads the file, the prints the total resource size. */
+function formSubmit() {
   var hubURL = document.getElementById('hubURL').value;
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      var xmlDoc = xmlhttp.responseXML;
-      var xmlSize = xmlDoc.getElementsByTagName('size')[0].childNodes[0].nodeValue;
-      document.getElementById('xmlSize').innerHTML = xmlSize;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', hubURL, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      var totalSize = xhr.responseText.length;
+      var totalSizeMB = totalSize / 1000000;
+      var totalSizeMBRounded = totalSizeMB.toFixed(2);
+      var totalSizeMBRoundedString = totalSizeMBRounded.toString();
+      var totalSizeMBRoundedStringCommas = totalSizeMBRoundedString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      var totalSizeMBRoundedStringCommasFinal = totalSizeMBRoundedStringCommas + ' MB';
+      document.getElementById('totalSize').innerHTML = totalSizeMBRoundedStringCommasFinal;
     }
-  };
-  xmlhttp.open("GET", hubURL, true);
-  xmlhttp.send();
+  }
+  xhr.send();
 }
 	</script>
   </body>
