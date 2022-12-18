@@ -138,6 +138,11 @@ document.getElementsByClassName('feedCheckForm')[0].addEventListener('submit', f
     }, 1200);
   });
 });
+
+		/* Extract a URL parameter that matches 'feed=' */
+		var feed = window.location.search.match(/feed=([^&]+)/)[1];
+		/* Add the variable as the pre-filled value of the form input id='hubURL' */
+		document.getElementById('hubURL').value = feed;
 		
 	</script>
   </body>
