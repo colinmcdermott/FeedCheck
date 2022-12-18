@@ -118,6 +118,29 @@
 		var feed = window.location.search.match(/feed=([^&]+)/)[1];
 		/* Add the variable as the pre-filled value of the form input id='hubURL' */
 		document.getElementById('hubURL').value = feed;
+		/* On form submit take the id = hubURL value and store as variable */
+var hubURL = document.getElementById('hubURL').value;
+/* Download hubURL and parse RSS feed, which should be stored in temporary memory */
+var rssFeed = new XMLHttpRequest();
+rssFeed.open('GET', hubURL, true);
+rssFeed.onreadystatechange = function() {
+  if (rssFeed.readyState == 4) {
+    if (rssFeed.status == 200 || rssFeed.status == 0) {
+      var xmlDoc = rssFeed.responseXML;
+      var items = xmlDoc.getElementsByTagName('item');
+      for (var i = 0; i < items.length; i++) {
+        var title = items[i].getElementsByTagName('title')[0].childNodes[0].nodeValue;
+        var link = items[i].getElementsByTagName('link')[0].childNodes[0].nodeValue;
+        var description = items[i].getElementsByTagName('description')[0].childNodes[0].nodeValue;
+        var pubDate = items[i].getElementsByTagName('pubDate')[0].childNodes[0].nodeValue;
+        var item = document.createElement('div');
+        item.innerHTML = '<a href="' + link + '">' + title + '</a><br>' + description + '<br>' + pubDate;
+        document.body.appendChild(item);
+      }
+    }
+  }
+}
+rssFeed.send(null);
 	</script>
   </body>
 </html>
