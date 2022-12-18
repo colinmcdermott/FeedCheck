@@ -114,7 +114,22 @@ feedCheckForm.addEventListener('submit', function(e) {
   e.preventDefault();
   var hubURL = document.getElementById('hubURL').value;
   var results = document.getElementById('results');
-  results.innerHTML = '<p>' + hubURL + '</p>';
+  results.innerHTML = '<p>Feed URL: ' + hubURL + '</p>';
+});
+		/* Send a valid HTTP request to the XML file at the location of 'hubURL' variable, and then print the file size of the XML file inside a paragraph tag in the id='results' element with the label 'File size:'. */
+var feedCheckForm = document.getElementsByClassName('feedCheckForm')[0];
+feedCheckForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  var hubURL = document.getElementById('hubURL').value;
+  var results = document.getElementById('results');
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', hubURL, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      results.innerHTML = '<p>File size: ' + xhr.responseText.length + '</p>';
+    }
+  };
+  xhr.send();
 });
 	</script>
   </body>
