@@ -106,33 +106,24 @@
 		</details>
 	</aside>
 	<script>
-		/* On form submit, take the value from the 'hubURL' field, download the XML feed at this location, then print the size of the downloaded file. */
-var form = document.createElement('form');
-form.setAttribute('method', 'post');
-form.setAttribute('action', '#');
-var input = document.createElement('input');
-input.setAttribute('type', 'text');
-input.setAttribute('name', 'hubURL');
-form.appendChild(input);
-var submit = document.createElement('input');
-submit.setAttribute('type', 'submit');
-submit.setAttribute('value', 'Submit');
-form.appendChild(submit);
-document.body.appendChild(form);
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
+		/* When the form with the class 'feedCheckForm' is submitted, take the URL value of the 'hubURL' field, download the XML at this URL and print the size of the XML on the page. */
+var feedCheckForm = document.getElementsByClassName('feedCheckForm')[0];
+feedCheckForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  var hubURL = document.getElementsByClassName('hubURL')[0].value;
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', input.value, true);
+  xhr.open('GET', hubURL, true);
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
-      var size = xhr.responseText.length;
-      var sizeNode = document.createElement('div');
-      sizeNode.innerHTML = 'Size: ' + size;
-      document.body.appendChild(sizeNode);
+      var xml = xhr.responseText;
+      var xmlSize = xml.length;
+      var xmlSizeNode = document.createElement('div');
+      xmlSizeNode.innerHTML = 'XML size: ' + xmlSize;
+      document.body.appendChild(xmlSizeNode);
     }
-  }
+  };
   xhr.send();
-}, false);
+});
 	</script>
   </body>
 </html>
