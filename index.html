@@ -121,25 +121,26 @@ document.querySelector('.feedCheckForm').addEventListener('submit', function(eve
       document.getElementById('results').innerHTML += '<p>Response size: ' + text.length + '</p>';
     });
 });
-/* Print 'Additional checking started' inside a paragraph tag in the id='loading' element. In a function called 'repeater()' use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside and print the size of the returned RSS feed inside a paragraph tag in the id='additional' element with the label 'Response size:' and store it in local memory. If the value of the returned RSS feed is the same as in local memory, print 'Feed size unchanged' inside a paragraph tag in the id='change' element, otherwise if the value is different print 'New feed size' inside a paragraph tag in the id='change' element. At 5 second intervals repeat the 'repeater()' function. */
+/* Print 'Additional checking started' inside a paragraph tag in the id='loading' element. In a function called 'repeater()' use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside a paragraph tag in the id='additional' element with the label 'Response size:' and store it in local memory with the name 'feedsize' appended by the feed URL. If the value of the returned RSS feed is the same as in local memory, print 'Feed size unchanged' inside a paragraph tag in the id='change' element, otherwise if the value is different print 'New feed size' inside a paragraph tag in the id='change' element. At 5 second intervals repeat the 'repeater()' function, appending a new paragraph each time. */
 document.getElementById('loading').innerHTML = '<p>Additional checking started</p>';
-var previousSize = 0;
 function repeater() {
   fetch(hubURL, {mode: 'cors'})
     .then(function(response) {
       return response.text();
     })
     .then(function(text) {
-      document.getElementById('additional').innerHTML = '<p>Response size: ' + text.length + '</p>';
-      if (text.length == previousSize) {
-        document.getElementById('change').innerHTML = '<p>Feed size unchanged</p>';
+      document.getElementById('additional').innerHTML += '<p>Response size: ' + text.length + '</p>';
+      var feedsize = localStorage.getItem(hubURL);
+      if (feedsize == text.length) {
+        document.getElementById('change').innerHTML += '<p>Feed size unchanged</p>';
       } else {
-        document.getElementById('change').innerHTML = '<p>New feed size</p>';
+        document.getElementById('change').innerHTML += '<p>New feed size</p>';
       }
-      previousSize = text.length;
+      localStorage.setItem(hubURL, text.length);
     });
+  setTimeout(repeater, 5000);
 }
-setInterval(repeater, 5000);
+repeater();
 		
 	</script>
   </body>
