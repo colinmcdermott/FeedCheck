@@ -106,24 +106,21 @@
 		</details>
 	</aside>
 	<script>
-		/* When the form with the class 'feedCheckForm' is submitted, take the URL value of the 'hubURL' field, download the XML at this URL and print the size of the XML on the page. */
-var feedCheckForm = document.getElementsByClassName('feedCheckForm')[0];
-feedCheckForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  var hubURL = document.getElementsByClassName('hubURL')[0].value;
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', hubURL, true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-      var xml = xhr.responseText;
-      var xmlSize = xml.length;
-      var xmlSizeNode = document.createElement('div');
-      xmlSizeNode.innerHTML = 'XML size: ' + xmlSize;
-      document.body.appendChild(xmlSizeNode);
-    }
-  };
-  xhr.send();
-});
+		/* Create a function called formSubmit(). This function downloads the value of ID = 'hubURL' and prints the file size on the page. */
+		function formSubmit() {
+		  var hubURL = document.getElementById('hubURL').value;
+		  var xhr = new XMLHttpRequest();
+		  xhr.open('GET', hubURL, true);
+		  xhr.onreadystatechange = function() {
+		    if (xhr.readyState == 4) {
+		      var fileSize = xhr.getResponseHeader('Content-Length');
+		      var fileSizeNode = document.createElement('div');
+		      fileSizeNode.innerHTML = 'File size: ' + fileSize;
+		      document.body.appendChild(fileSizeNode);
+		    }
+		  }
+		  xhr.send();
+		}
 	</script>
   </body>
 </html>
