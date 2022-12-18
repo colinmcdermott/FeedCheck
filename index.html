@@ -102,18 +102,15 @@
 
 	<script>
 
-		/* When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL' and print this inside paragraph tags inside the id=results element. Send a HTTP request to the XML file at the location of 'hubURL' variable, and then print the size of the returned HTTP response inside a paragraph tag in the id='results' element with the label 'Response size:'. */
-var feedCheckForm = document.getElementsByClassName('feedCheckForm')[0];
-feedCheckForm.addEventListener('submit', function(event) {
-  event.preventDefault();
+/* When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL' and print this inside paragraph tags inside the id=results element with the label  'Feed URL:'. Send a secure cross-origin HTTP request to the XML file at the location of the 'hubURL' variable, wait for a response, and then print the size of the returned HTTP response inside a paragraph tag in the id='results' element with the label 'Response size:'. */
+document.getElementById('submit').addEventListener('click', function() {
   var hubURL = document.getElementById('hubURL').value;
-  var results = document.getElementById('results');
-  results.innerHTML = '<p>' + hubURL + '</p>';
+  document.getElementById('results').innerHTML = '<p>Feed URL: ' + hubURL + '</p>';
   var xhr = new XMLHttpRequest();
   xhr.open('GET', hubURL, true);
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
-      results.innerHTML += '<p>Response size: ' + xhr.responseText.length + '</p>';
+      document.getElementById('results').innerHTML += '<p>Response size: ' + xhr.responseText.length + '</p>';
     }
   };
   xhr.send();
