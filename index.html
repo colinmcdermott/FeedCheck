@@ -106,21 +106,19 @@
 		</details>
 	</aside>
 	<script>
-		/* Create a function called formSubmit(). This function downloads the value of ID = 'hubURL' and prints the file size on the page. */
 		function formSubmit() {
-		  var hubURL = document.getElementById('hubURL').value;
-		  var xhr = new XMLHttpRequest();
-		  xhr.open('GET', hubURL, true);
-		  xhr.onreadystatechange = function() {
-		    if (xhr.readyState == 4) {
-		      var fileSize = xhr.getResponseHeader('Content-Length');
-		      var fileSizeNode = document.createElement('div');
-		      fileSizeNode.innerHTML = 'File size: ' + fileSize;
-		      document.body.appendChild(fileSizeNode);
-		    }
-		  }
-		  xhr.send();
-		}
+  var hubURL = document.getElementById('hubURL').value;
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      var xmlDoc = xmlhttp.responseXML;
+      var xmlSize = xmlDoc.getElementsByTagName('size')[0].childNodes[0].nodeValue;
+      document.getElementById('xmlSize').innerHTML = xmlSize;
+    }
+  };
+  xmlhttp.open("GET", hubURL, true);
+  xmlhttp.send();
+}
 	</script>
   </body>
 </html>
