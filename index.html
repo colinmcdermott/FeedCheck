@@ -102,8 +102,9 @@
 
 	<script>
 
-/* Do not refresh the page when the submit button is clicked. When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL', set this as variable 'hubURL', then print the value of 'hubURL' inside paragraph tags in the id=results element with the label  'Feed URL:'. Fetch the RSS feed at the location of the 'hubURL' variable, then print the size of the returned RSS feed inside a paragraph tag in the id='results' element with the label 'Response size:'. */
-document.getElementsByClassName('feedCheckForm')[0].onsubmit = function() {
+/* Do not refresh the page when the submit button is clicked. When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL', set this as variable 'hubURL', then print the value of 'hubURL' inside paragraph tags in the id=results element with the label  'Feed URL:'. Use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable, then print the size of the returned RSS feed inside a paragraph tag in the id='results' element with the label 'Response size:'. */
+document.querySelector('.feedCheckForm').addEventListener('submit', function(event) {
+  event.preventDefault();
   var hubURL = document.getElementById('hubURL').value;
   document.getElementById('results').innerHTML = '<p>Feed URL: ' + hubURL + '</p>';
   fetch(hubURL)
@@ -113,8 +114,7 @@ document.getElementsByClassName('feedCheckForm')[0].onsubmit = function() {
     .then(function(text) {
       document.getElementById('results').innerHTML += '<p>Response size: ' + text.length + '</p>';
     });
-  return false;
-};
+});
 		
 	</script>
   </body>
