@@ -57,6 +57,9 @@
 			text-decoration:underline;
 			cursor:pointer;
 		}
+		iframe#webSubPing {
+		  border:none;
+		  }
 		@media screen and (max-width: 650px) {
 			:root {
 			    --flowSpace: 0.7em;
@@ -100,13 +103,13 @@
 		</results>
 		<loading id="loading">
 		</loading>
-		<change id="change">
+		<change id="change" class="statsWindow">
 		</change>
-		<additional id="additional">
+		<additional id="additional" class="statsWindow">
 		</additional>
 	</main>
 	  
-	  <iframe width="100%" height="400" id="webSubPing"></iframe>
+	  <iframe width="0" height="0" id="webSubPing"></iframe>
 
 	<script>
 
