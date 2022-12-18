@@ -118,7 +118,7 @@ document.getElementsByClassName('feedCheckForm')[0].addEventListener('submit', f
   }).then(function(text) {
     document.getElementById('results').innerHTML += '<p>Response size: ' + text.length + '</p>';
     setTimeout(function() {
-      document.getElementById('loading').innerHTML = '<p>Additional checking started</p>';
+      document.getElementById('loading').innerHTML = '<p>Additional checking started at 30 second intervals</p>';
       function repeater() {
         fetch(hubURL, {mode: 'cors'}).then(function(response) {
           return response.text();
