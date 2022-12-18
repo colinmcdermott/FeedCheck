@@ -108,7 +108,7 @@
 
 	<script>
 
-/* Do not refresh the page when the submit button is clicked. When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL', set this as variable 'hubURL', then print the value of 'hubURL' inside paragraph tags in the id=results element with the label  'Feed URL:'. Use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside a paragraph tag in the id='results' element with the label 'Response size:'. Next, print 'Additional checking started' inside a paragraph tag in the id='loading' element. In a function called 'repeater()' use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside a paragraph tag in the id='additional' element with the label 'Response size:' and store it in local memory with the name 'feedsize' appended by the feed URL. If the value of the returned RSS feed is the same as in local memory, print 'Feed size unchanged' inside a paragraph tag in the id='change' element, otherwise if the value is different print 'New feed size' inside a paragraph tag in the id='change' element. At 5 second intervals repeat the 'repeater()' function, appending a new paragraph each time. */
+/* Do not refresh the page when the submit button is clicked. When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL', set this as variable 'hubURL', then print the value of 'hubURL' inside paragraph tags in the id=results element with the label  'Feed URL:'. Use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside a paragraph tag in the id='results' element with the label 'Response size:'. Wait 1 second, print 'Additional checking started' inside a paragraph tag in the id='loading' element. In a function called 'repeater()' use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside as a new paragraph tag in the id='additional' element with the label 'Response size:' and store it in local memory with the name 'feedsize' appended by the feed URL. If the value of the returned RSS feed is the same as in local memory, print 'Feed size unchanged' inside a new paragraph tag in the id='change' element, otherwise if the value is different print 'New feed size!' inside a paragraph tag in the id='change' element. At 5 second intervals repeat the 'repeater()' function. */
 document.getElementsByClassName('feedCheckForm')[0].addEventListener('submit', function(event) {
   event.preventDefault();
   var hubURL = document.getElementById('hubURL').value;
@@ -117,23 +117,25 @@ document.getElementsByClassName('feedCheckForm')[0].addEventListener('submit', f
     return response.text();
   }).then(function(text) {
     document.getElementById('results').innerHTML += '<p>Response size: ' + text.length + '</p>';
-    document.getElementById('loading').innerHTML = '<p>Additional checking started</p>';
-    var repeater = function() {
-      fetch(hubURL, {mode: 'cors'}).then(function(response) {
-        return response.text();
-      }).then(function(text) {
-        document.getElementById('additional').innerHTML += '<p>Response size: ' + text.length + '</p>';
-        var feedsize = text.length;
-        if (localStorage.getItem(hubURL) == feedsize) {
-          document.getElementById('change').innerHTML += '<p>Feed size unchanged</p>';
-        } else {
-          document.getElementById('change').innerHTML += '<p>New feed size</p>';
-        }
-        localStorage.setItem(hubURL, feedsize);
-      });
-    };
-    repeater();
-    setInterval(repeater, 5000);
+    setTimeout(function() {
+      document.getElementById('loading').innerHTML = '<p>Additional checking started</p>';
+      function repeater() {
+        fetch(hubURL, {mode: 'cors'}).then(function(response) {
+          return response.text();
+        }).then(function(text) {
+          document.getElementById('additional').innerHTML += '<p>Response size: ' + text.length + '</p>';
+          var feedsize = text.length;
+          if (localStorage.getItem(hubURL) == feedsize) {
+            document.getElementById('change').innerHTML = '<p>Feed size unchanged</p>';
+          } else {
+            document.getElementById('change').innerHTML = '<p>New feed size!</p>';
+            localStorage.setItem(hubURL, feedsize);
+          }
+        });
+      }
+      repeater();
+      setInterval(repeater, 5000);
+    }, 1000);
   });
 });
 		
