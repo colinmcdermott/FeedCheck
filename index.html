@@ -178,6 +178,14 @@ document.getElementsByClassName('feedCheckForm')[0].addEventListener('submit', f
 		/* Add the variable as the pre-filled value of the form input id='hubURL' */
 		document.getElementById('hubURL').value = feed;
 		
+		/* Extract a URL parameter that matches 'auto='. If the value of the parameter is set to 'true' then submit the form class='webSubForm'. */
+		var url = window.location.href;
+		var auto = url.match(/auto=([^&]*)/);
+		if (auto && auto[1] == 'true') {
+		  var form = document.getElementsByClassName('webSubForm')[0];
+		  form.submit();
+		}
+		
 	</script>
   </body>
 </html>
