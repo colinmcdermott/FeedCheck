@@ -98,6 +98,8 @@
 				required>
 			  <input type='submit' value='Submit' />
 		</form> 
+		<results>
+		</results>
 	</main>
 	<aside>
 		<details>
@@ -106,12 +108,10 @@
 		</details>
 	</aside>
 	<script>
-	/* Create a function called formSubmit(). The formSubmit() function takes the value of ID = 'hubURL' from the form and prints this on the page. */
+	/* Create a function called formSubmit(). The formSubmit() function takes the value of ID = 'hubURL' when the formSubmit() function is called, and prints this inside the <results> tag on the page. */
 function formSubmit() {
   var hubURL = document.getElementById('hubURL').value;
-  var hubURLDiv = document.createElement('div');
-  hubURLDiv.innerHTML = hubURL;
-  document.body.appendChild(hubURLDiv);
+  document.getElementById('results').innerHTML = hubURL;
 }
 	</script>
   </body>
