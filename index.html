@@ -108,10 +108,10 @@
 		</details>
 	</aside>
 	<script>
-	/* Create a function called formSubmit(). The formSubmit() function takes the value of ID = 'hubURL' when the formSubmit() function is called, and prints this inside the <results> tag on the page. */
+	/* Create a function called formSubmit(). The formSubmit() function takes the value of ID = 'hubURL' when the formSubmit() function is called, and prints this inside the id =results tag on the page inside a paragraph tag. */
 function formSubmit() {
   var hubURL = document.getElementById('hubURL').value;
-  document.getElementById('results').innerHTML = hubURL;
+  document.getElementById('results').innerHTML = '<p>' + hubURL + '</p>';
 }
 	</script>
   </body>
