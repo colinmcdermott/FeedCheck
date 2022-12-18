@@ -108,29 +108,25 @@
 		</details>
 	</aside>
 	<script>
-	/* When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL' and print this inside paragraph tags inside the id=results element. */
+
+		/* When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL' and print this inside paragraph tags inside the id=results element. Send a valid HTTP request to the XML file at the location of 'hubURL' variable, and then print the file size of the XML file inside a paragraph tag in the id='results' element with the label 'File size:'. */
 var feedCheckForm = document.getElementsByClassName('feedCheckForm')[0];
-feedCheckForm.addEventListener('submit', function(e) {
-  e.preventDefault();
+feedCheckForm.addEventListener('submit', function(event) {
+  event.preventDefault();
   var hubURL = document.getElementById('hubURL').value;
   var results = document.getElementById('results');
-  results.innerHTML = '<p>Feed URL: ' + hubURL + '</p>';
-});
-		/* Send a valid HTTP request to the XML file at the location of 'hubURL' variable, and then print the file size of the XML file inside a paragraph tag in the id='results' element with the label 'File size:'. */
-var feedCheckForm = document.getElementsByClassName('feedCheckForm')[0];
-feedCheckForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  var hubURL = document.getElementById('hubURL').value;
-  var results = document.getElementById('results');
+  results.innerHTML = '<p>' + hubURL + '</p>';
   var xhr = new XMLHttpRequest();
   xhr.open('GET', hubURL, true);
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
-      results.innerHTML = '<p>File size: ' + xhr.responseText.length + '</p>';
+      var fileSize = xhr.getResponseHeader('Content-Length');
+      results.innerHTML += '<p>File size: ' + fileSize + '</p>';
     }
   };
   xhr.send();
 });
+		
 	</script>
   </body>
 </html>
