@@ -141,7 +141,7 @@
 document.getElementsByClassName('feedCheckForm')[0].addEventListener('submit', function(event) {
   event.preventDefault();
   var hubURL = document.getElementById('hubURL').value;
-  document.getElementById('results').innerHTML = '<p>Feed URL: ' + hubURL + '</p>';
+  document.getElementById('results').innerHTML = '<p>Feed URL: <a href="https://pubsubhubbub.appspot.com/topic-details?hub.url=' + hubURL + '" target="_blank">' + hubURL + '</a></p>';
   fetch(hubURL, {
     mode: 'cors'
   }).then(function(response) {
