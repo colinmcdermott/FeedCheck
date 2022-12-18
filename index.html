@@ -102,18 +102,36 @@
 
 	<script>
 
-/* Do not refresh the page when the submit button is clicked. When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL', set this as variable 'hubURL', then print the value of 'hubURL' inside paragraph tags in the id=results element with the label  'Feed URL:'. Use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable, then print the size of the returned RSS feed inside a paragraph tag in the id='results' element with the label 'Response size:'. */
+/* Do not refresh the page when the submit button is clicked. When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL', set this as variable 'hubURL', then print the value of 'hubURL' inside paragraph tags in the id=results element with the label  'Feed URL:'. Use the native Javascript Fetch API to fetch the RSS feed at the location of the 'hubURL' variable with a CORS cross-origin header, then print the size of the returned RSS feed inside a paragraph tag in the id='results' element with the label 'Response size:'. Show a button with CSS id='repeat'. When the 'repeat' button is click, the repeat the RSS fetch at 10 second intervals, and print 'Fetch repeated' inside a paragraph tag in the id='results' element after each repeat. */
 document.querySelector('.feedCheckForm').addEventListener('submit', function(event) {
   event.preventDefault();
   var hubURL = document.getElementById('hubURL').value;
   document.getElementById('results').innerHTML = '<p>Feed URL: ' + hubURL + '</p>';
-  fetch(hubURL)
+  fetch(hubURL, {
+      mode: 'cors'
+    })
     .then(function(response) {
       return response.text();
     })
     .then(function(text) {
       document.getElementById('results').innerHTML += '<p>Response size: ' + text.length + '</p>';
     });
+  document.getElementById('repeat').style.display = 'block';
+});
+document.getElementById('repeat').addEventListener('click', function(event) {
+  var hubURL = document.getElementById('hubURL').value;
+  fetch(hubURL, {
+      mode: 'cors'
+    })
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      document.getElementById('results').innerHTML += '<p>Fetch repeated</p>';
+    });
+  setTimeout(function() {
+    document.getElementById('repeat').click();
+  }, 10000);
 });
 		
 	</script>
