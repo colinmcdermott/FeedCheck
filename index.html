@@ -87,7 +87,7 @@
   </head>
   <body>
 	<main>
-		<form class='feedCheckForm' onsubmit='formSubmit()'>
+		<form class='feedCheckForm'>
 			  <label for='hubURL'>RSS Feed URL:</label>
 			  <input 
 				type='url' 
@@ -108,11 +108,14 @@
 		</details>
 	</aside>
 	<script>
-	/* Create a function called formSubmit(). The formSubmit() function takes the value of ID = 'hubURL' when the formSubmit() function is called, and prints this inside the id =results tag on the page inside a paragraph tag. */
-function formSubmit() {
+	/* When the 'submit' input is clicked on the form with class='feedCheckForm', take the value of id='hubURL' and print this inside paragraph tags inside the id=results element. */
+var feedCheckForm = document.getElementsByClassName('feedCheckForm')[0];
+feedCheckForm.addEventListener('submit', function(e) {
+  e.preventDefault();
   var hubURL = document.getElementById('hubURL').value;
-  document.getElementById('results').innerHTML = '<p>' + hubURL + '</p>';
-}
+  var results = document.getElementById('results');
+  results.innerHTML = '<p>' + hubURL + '</p>';
+});
 	</script>
   </body>
 </html>
